@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- the title that shows in the browser tab -->
+    <title>Mini Blog</title>
+    <!-- link to css -->
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+
+<body>
+    <!-- main heading for the page -->
+    <h1>Create a Post</h1>
+    <!-- form to create a new blog post using POST -->
+    <form action="/submit" method="POST">
+        <!-- author -->
+        <input type="text" name="creatorName" placeholder="Your name">
+        <!-- title-->
+        <input type="text" name="title" placeholder="Title" required>
+        <!-- content-->
+        <textarea name="content" placeholder="Content" rows="4" required></textarea>
+        <!-- submit button-->
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- line to split-->
+    <hr>
+
+    <!-- subheader -->
+    <h2>Posts</h2>
+    <!-- EJS if there are no posts-->
+    <% if (posts.length === 0) 
+    { %>
+        <!-- give this output -->
+        <p>No posts!</p>
+    <% } 
+    
+    else 
+    { %>
+        <!-- else loop through posts in reverse order so newest is at the top-->
+        <% posts.slice().reverse().forEach(post => 
+        { %>
+            <!-- container for the post -->
+            <div class="post">
+                <!-- display title-->
+                <h3><%= post.title %></h3>
+                <!-- show author -->
+                <p><%= post.creatorName %></p>
+                <!-- show time -->
+                <p>Time: <%= post.createdAt %></p>
+                <!-- show the content-->
+                <p><%= post.content %></p>
+                <!-- link to be able edit the post -->
+                <a href="/edit/<%= post.id %>">Edit</a>
+
+                <!-- delete form and button-->
+                <form action="/delete/<%= post.id %>" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+            <!-- line to split-->
+            <hr>
+
+        <% }) %>
+
+    <% } %>
+
+</body>
+
+</html>

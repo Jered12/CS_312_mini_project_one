@@ -1,0 +1,15 @@
+<!-- this page will hold the form for editing a blog -->
+<form action="/edit/<%= post.id %>" method="POST">
+    <!-- first we need to re input the creators name if you want to change it 
+     when you are editing it. it will hold the current crestors name from the post-->
+    <input type="text" name="creatorName" value="<%= post.creatorName %>" required>
+
+    <!-- then an input to also edit the title if needed -->
+    <input type="text" name="title" value="<%= post.title %>" required>
+
+    <!-- finally if the user wants to edit the blog post they can -->
+    <textarea name="content" required><%= post.content %></textarea>
+
+    <!-- and finallya submit button to add everythin that was updated into the server -->
+    <button type="submit">Save</button>
+</form>
